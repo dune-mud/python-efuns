@@ -1,3 +1,5 @@
+config = None
+
 def startup(config_path='~/.ldmud-efuns'):
     """ Loads all registered packages that offer the ldmud_efun entry point.
 
@@ -10,6 +12,7 @@ def startup(config_path='~/.ldmud-efuns'):
     import pkg_resources, traceback, sys, os, configparser
     import ldmud
 
+    global config
     config = configparser.ConfigParser()
     config['efuns'] = {}
     config.read(os.path.expanduser(config_path))
