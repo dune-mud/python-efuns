@@ -1,6 +1,8 @@
 import importlib, pkg_resources, site, sys, os, configparser
 import ldmud
 
+from . import startup
+
 def reload_modules():
     """
     SYNOPSIS
@@ -21,10 +23,7 @@ def reload_modules():
     modules = dict(sys.modules)
     reloaded = set()
 
-    config = configparser.ConfigParser()
-    config['efuns'] = {}
-    config.read(os.path.expanduser('~/.ldmud-efuns'))
-    efunconfig = config['efuns']
+    efunconfig = startup.config['efuns']
 
     for entry_point in ws.iter_entry_points('ldmud_efun'):
         if efunconfig.getboolean(entry_point.name, True):
