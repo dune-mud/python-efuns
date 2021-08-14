@@ -23,6 +23,9 @@ def reload_modules():
     modules = dict(sys.modules)
     reloaded = set()
 
+    # Reload the configuration to ensure we reload efuns based on the up-to-date
+    # state of the config on disk.
+    startup.reload_config()
     efunconfig = startup.config['efuns']
 
     for entry_point in ws.iter_entry_points('ldmud_efun'):
